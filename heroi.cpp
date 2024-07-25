@@ -7,18 +7,20 @@ Heroi::Heroi() : HP(100), Municao(50){
     }
     sprite.setTexture(texture);
     sprite.setPosition(400,300); //Centro da janela
-    sprite.setScale(0.05f,0.05f);  //Escala dependendo do tomanaho da imagem
+    sprite.setScale(0.08f,0.08f);  //Escala dependendo do tomanaho da imagem
 } 
 
-void Heroi::andar(float dx, float dy){ //Direção x e y
-    sprite.move(dx, dy);
+void Heroi::andar(sf::Vector2f direction){ //Direção x e y
+    sprite.move(direction);
 }
 
-void Heroi::atirar(){
+void Heroi::atirar(std::vector<Projectile>& projectiles, sf::Texture& projectileTexture){
     if(Municao > 0){
         Municao--;
-        //Mecanica de atirar:
-
+        sf::Vector2f position = sprite.getPosition();
+        sf::Vector2f direction(1.0f,0.0f);
+        float speed = 500.0f;
+        projectiles.emplace_back(projectileTexture, position, direction, speed);
     }
 }
 
